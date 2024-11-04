@@ -9,7 +9,7 @@ def convert_to_datetime(date_str):
     try:
         if pd.isnull(date_str) or date_str == '':
             return None  # Handle missing or empty dates as None
-        return datetime.strptime(str(date_str), "%m/%d/%Y")  # Modify the format as per your data
+        return datetime.strptime(str(date_str), "%m/%d/%Y")
     except ValueError:
         return None
 
@@ -22,6 +22,6 @@ def test_convert_to_datetime():
     assert result == expected_output, f"Test failed: Expected {expected_output}, got {result}"
     print(f"Actual result: {result}")
 
-# Run the test function
+
 test_convert_to_datetime()
 
