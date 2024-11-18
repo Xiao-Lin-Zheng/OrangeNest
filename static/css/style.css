@@ -19,11 +19,11 @@ body, html {
 #header {
     display: flex;
     align-items: center;
-    background-color: #bbf4f6; /* Blue background for header */
+    background-color: #bbf4f6;
     padding: 15px;
     flex-wrap: wrap;
     justify-content: space-between;
-    font-family: 'Signika', sans-serif; /* Header font */
+    font-family: 'Signika', sans-serif; 
 }
 
 #header .form-inline {
@@ -59,7 +59,7 @@ body, html {
 #header #daterange,
 #price-slider {
     font-family: 'Molengo', sans-serif;
-    margin-left: 10px; /* Applying Molengo font */
+    margin-left: 10px; 
 }
 
 #price-slider {
@@ -87,7 +87,7 @@ body, html {
     font-weight: bold;
     transition: background-color 0.3s;
     font-size: 14px;
-    font-family: 'Molengo', sans-serif; /* Applying Molengo font to buttons */
+    font-family: 'Molengo', sans-serif; 
 }
 
 .dropbtn:hover, .dropbtn.active {
@@ -118,12 +118,6 @@ body, html {
     width: 100%;
     margin-top: 5px;
     max-width: 400px;
-}
-
-.noUi-handle {
-    height: 20px; /* Reduces handle size */
-    width: 16px;
-    top: -4px; /* Adjusts handle position */
 }
 
 .noUi-value {
@@ -187,5 +181,20 @@ body, html {
     text-align: center;
     padding: 10px;
     font-size: 14px;
-    font-family: 'Signika', sans-serif; /* Font for footer text */
+    font-family: 'Signika', sans-serif; 
+}
+
+#listings {
+    padding: 20px;
+}
+
+#listings .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+#listings .card:hover {
+    transform: scale(1.05);
 }

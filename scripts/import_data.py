@@ -8,6 +8,8 @@ import calendar
 
 def main():
     # Path to the downloaded CSV file from Google Sheets
+    # Note: this is specific to a local directory for loading data
+    # You do NOT need to run thus script because the database (OrangeNestListings_test.db) is already included in the 'data' folder.
     csv_path = '/Users/xiaolinzheng/Downloads/orangenest_data.csv'
     
     # Connect to the SQLite database
@@ -15,10 +17,10 @@ def main():
     
     # Read and clean CSV data
     df = pd.read_csv(csv_path)
-    
+
     # Perform necessary cleaning or transformation
     df = clean_data(df)
-    
+
     # Insert data into SQLite table
     df.to_sql('listinginfo', conn, if_exists='replace', index=False)
 
@@ -32,7 +34,7 @@ def clean_data(df):
     df['furnished'] = df['furnished'].apply(lambda x: 'Yes' if x.lower() in ['yes', 'y'] else 'No')
     df['laundry'] = df['laundry'].apply(lambda x: 'Yes' if x.lower() in ['yes', 'y'] else 'No')
     df['parking'] = df['parking'].apply(lambda x: 'Yes' if x.lower() in ['yes', 'y'] else 'No')
-        # Generate latitude and longitude based on address information
+    # Generate latitude and longitude based on address information
     df['latitude'], df['longitude'] = zip(*df.apply(geocode_address, axis=1))
 
     # Calculate distance to Syracuse University
@@ -73,7 +75,7 @@ def geocode_address(row):
     Uses Geopy's Nominatim geolocator.
     """
     geolocator = Nominatim(user_agent="orangenest_geocoder")
-    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)  # Rate limiter to avoid hitting request limits
+    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1) 
 
     # Construct full address from the row data
     full_address = f"{row['street_address']}, {row['city']}, {row['postal_code']}"
@@ -107,7 +109,7 @@ def convert_to_datetime(date_str):
     try:
         if pd.isnull(date_str) or date_str == '':
             return None  # Handle missing or empty dates as None
-        return datetime.strptime(str(date_str), "%m/%d/%Y")  # Modify the format as per your data
+        return datetime.strptime(str(date_str), "%m/%d/%Y")
     except ValueError:
         return None
 

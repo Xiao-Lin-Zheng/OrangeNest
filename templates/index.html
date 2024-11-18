@@ -8,18 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Custom JavaScript for Map and Filtering -->
-    <script src="/static/js/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ22THkmSn8KfUaiizLWiLtGz_k5JX4BQ&callback=initMap" async defer></script>
 
 </head>
@@ -42,84 +39,57 @@
 
         <!-- Header Section -->
         <div id="header" class="container-fluid py-3">
-            <form id="searchengine" method="post" class="form-inline justify-content-center">
-                
-                <!-- Logo and Title -->
-                <div class="mr-3">
+            <form id="searchengine" method="post" class="form-inline d-flex align-items-center justify-content-between">
+
+                <!-- Logo -->
+                <div class="logo-container">
                     <img src="/static/images/Orangenest_logo.png" alt="OrangeNest Logo" width="50" height="50">
                 </div>
-
-                <!-- Price Range Slider -->
-                <div class="dropdown mr-3">
-                    <label for="price-range" class="mr-2">$ Price Range:</label>
-                    <div class="dropbtn">
-                        $ <input type="number" id="LP" name="lp" value="400" step="50"> - $ 
-                        <input type="number" id="MP" name="mp" value="5000" step="50">
-                    </div>
-                    <div id="sliderbox">
-                    </div>
+        
+                <!-- Price Range -->
+                <div class="price-range">
+                    <label for="price-range">$ Price Range:</label>
+                    $ <input type="number" id="LP" name="lp" value="400" step="50"> -
+                    $ <input type="number" id="MP" name="mp" value="5000" step="50">
                 </div>
-
+        
                 <!-- Availability -->
-                <div class="dropdown mr-3">
-                    <label class="mr-2"><i class="fa fa-calendar"></i> Availability:</label>
+                <div class="availability">
+                    <label for="daterange"><i class="fa fa-calendar"></i> Availability:</label>
                     <input type="text" name="daterange" id="daterange" placeholder="Select date range">
                 </div>
-
-
-                <!-- Facility Selection -->
+        
+                <!-- Facility -->
                 <div class="dropdown">
-                    <button class="dropbtn" onclick="toggleActive(this)">
-                        Facility
-                    </button>
+                    <button class="dropbtn" onclick="toggleActive(this)">Facility</button>
                     <div class="dropdown-content">
-                        <input type="hidden" name="AC" value=""/>
-                        <input type="checkbox" name="AC" value="1"> Air Conditioning <br>
-                        <input type="hidden" name="Parking" value=""/>
+
+                        <!-- Facility Options: AC/Parking/Laundry/Furnished -->
+                        <input type="checkbox" name="AC" value="1"> AC <br>
                         <input type="checkbox" name="Parking" value="1"> Parking<br>
-                        <input type="hidden" name="LF" value=""/>
-                        <input type="checkbox" name="LF" value="1"> Laundry Facilities<br>
-                        <input type="hidden" name="Furnished" value=""/>
+                        <input type="checkbox" name="LF" value="1"> Laundry<br>
                         <input type="checkbox" name="Furnished" value="1"> Furnished<br>
                     </div>
                 </div>
-
-                <!-- Type of Accommodation -->
+        
+                <!-- Accommodation Type -->
                 <div class="dropdown">
-                    <button class="dropbtn" onclick="toggleActive(this)">
-                        Type
-                    </button>
+                    <button class="dropbtn" onclick="toggleActive(this)">Type</button>
                     <div class="dropdown-content">
-                        <input type="hidden" name="Apartment" value="none"/>
+
+                        <!-- Type Options: Apt/House/Other -->
                         <input type="checkbox" name="Apartment" value="Apartment" checked> Apartment<br>
-                        <input type="hidden" name="House" value="none"/>
                         <input type="checkbox" name="House" value="House" checked> House <br>
-                        <input type="hidden" name="Other" value="none"/>
                         <input type="checkbox" name="Other" value="Other" checked> Other <br>
                     </div>
-                    <!-- Price Range Slider Script -->
-<script>
-    var slider = document.getElementById('price-slider');
-    noUiSlider.create(slider, {
-        start: [400, 5000],
-        connect: true,
-        range: { 'min': 0, 'max': 5000 },
-        step: 50,
-        pips: { mode: 'values', values: [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000], density: 300 }
-    });
-
-    var LP = document.getElementById('LP');
-    var MP = document.getElementById('MP');
-
-    slider.noUiSlider.on('update', function (values, handle) {
-        var value = values[handle];
-        if (handle) { MP.value = Math.round(value); } 
-        else { LP.value = Math.round(value); }
-    });
-
-    LP.addEventListener('change', function () { slider.noUiSlider.set([this.value, null]); });
-    MP.addEventListener('change', function () { slider.noUiSlider.set([null, this.value]); });
-</script>
+                </div>
+        
+                <!-- Search Button -->
+                <div class="search-button">
+                    <button type="button" onclick="applyFilters(event)" class="dropbtn">Search Listings</button>
+                </div>
+            </form>
+        </div>
 
 <!-- Date Range Picker Script -->
 <script>
@@ -148,6 +118,7 @@
 
         <!-- Body Section -->
         <div class="content-container d-flex mt-4">
+
             <!-- Welcome Box -->
             <div class="welcome-box">
                 <h2>Welcome!</h2>
@@ -155,8 +126,114 @@
                 <p>Developed by students for students, OrangeNest aims to make finding a new home easy and stress-free.</p>
                 <p>Start exploring your next nest with OrangeNest, where your ideal home is just a click away!</p>
                 <a href="https://forms.gle/UdmQwgoDSJPjp6RZ9" target="_blank" class="btn btn-primary">Submit Your Listing</a>
+                <div id="results-container" class="mt-4"></div>
             </div>
 
+        <!-- Filter application script -->
+        <script>
+            function applyFilters(event) {
+                event.preventDefault();
+            
+                // Gather form data
+                const formData = new FormData(document.getElementById('searchengine'));
+
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+            
+                // Send an AJAX POST request to filter listings
+                fetch('/api/filter_listings', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); 
+                    displayListings(data);
+                })
+                .catch(error => console.error('Error:', error));
+            }
+            
+            // Display listings
+            function displayListings(listings) {
+                const container = document.getElementById('results-container');
+                const listingsPerPage = 4; // maximum of 4 listings per page
+                let currentPage = 1; // default to page 1
+            
+                // Function to render a specific page
+                function renderPage(page) {
+                    container.innerHTML = '';
+            
+                    const start = (page - 1) * listingsPerPage;
+                    const end = page * listingsPerPage;
+                    const paginatedListings = listings.slice(start, end);
+            
+                    if (paginatedListings.length === 0) {
+                        container.innerHTML = '<p class="text-center">No listings found!</p>';
+                        return;
+                    }
+            
+                    paginatedListings.forEach(listing => {
+                        const listingCard = `
+                            <div class="col-md-10 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="${listing.listing_photo || '/static/images/default.png'}" alt="Listing Photo">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${listing.listing_name}</h5>
+                                        <p class="card-text">
+                                            <strong>Address:</strong> ${listing.street_address}, ${listing.city}<br>
+                                            <strong>Price:</strong> $${listing.price}<br>
+                                            <strong>Contact:</strong> ${listing.contact}<br>
+                                            <strong>Type:</strong> ${listing.type_of_accommodation}<br>
+                                            <strong>Bedrooms:</strong> ${listing.bedrooms}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += listingCard;
+                    });
+            
+                    renderPagination(listings.length);
+                }
+            
+                // Function to render pagination buttons
+                function renderPagination(totalListings) {
+                    const paginationContainer = document.createElement('div');
+                    paginationContainer.className = 'pagination-container';
+                    paginationContainer.style.textAlign = 'center';
+            
+                    const totalPages = Math.ceil(totalListings / listingsPerPage);
+            
+                    paginationContainer.innerHTML = ''; // Clear previous pagination buttons
+            
+                    for (let i = 1; i <= totalPages; i++) {
+                        const button = document.createElement('button');
+                        button.className = 'pagination-button btn btn-primary mx-1';
+                        button.textContent = i;
+            
+                        if (i === currentPage) {
+                            button.style.fontWeight = 'bold';
+                        }
+            
+                        button.addEventListener('click', () => {
+                            currentPage = i; // Update the current page
+                            renderPage(currentPage); 
+                        });
+            
+                        paginationContainer.appendChild(button);
+                    }
+            
+                    container.appendChild(paginationContainer);
+                }
+            
+                // Render the first page
+                renderPage(currentPage);
+            }
+            
+            </script>
+            
+        
 
             <!-- Map Area -->
             <div class="map-container ml-4">
@@ -187,18 +264,84 @@
                 });
             }
             
-            // Fetch all listings from the server
-            async function fetchListings() {
-                const response = await fetch('/api/listings');
-                return await response.json();
-            }
-            
-            
-            // Clear all markers on the map
             function clearMarkers() {
-                markers.forEach(marker => marker.setMap(null));
-                markers = [];
+                markers.forEach(marker => marker.setMap(null)); // Remove each marker from the map
+                markers = []; // Clear the markers array
             }
+            
+            // Function to add a marker for a listing
+            function addListingMarker(listing) {
+                const marker = new google.maps.Marker({
+                    position: { lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) },
+                    map: map,
+                    icon: {
+                        url: '/static/images/listing-marker.png', 
+                        scaledSize: new google.maps.Size(30, 30), 
+                    },
+                    title: listing.listing_name, 
+                });
+            
+                // Add an info window for the marker that contains the listing name, price, address, and distance from SU
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div>
+                            <h5>${listing.listing_name}</h5>
+                            <p><strong>Price:</strong> $${listing.price}</p>
+                            <p><strong>Address:</strong> ${listing.street_address}, ${listing.city}</p>
+                            <p><strong>Distance:</strong> ${listing.distance_from_su} km</p>
+                        </div>
+                    `,
+                });
+            
+                // Add click listener to show the info window
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+            
+                // Add the marker to the markers array
+                markers.push(marker);
+            }
+            
+            // Update applyFilters to include marker logic
+            function applyFilters(event) {
+                event.preventDefault();
+            
+                // Gather form data
+                const formData = new FormData(document.getElementById('searchengine'));
+            
+                // Send an AJAX POST request to filter listings
+                fetch('/api/filter_listings', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // Debugging
+                        displayListings(data); // Display listings in the welcome box
+                        updateMapMarkers(data); // Add markers to the map
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+            
+            document.getElementById('searchengine').addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent default form submission
+                    applyFilters(event); // Call the applyFilters function
+                }
+            });
+
+            // Function to update map markers based on filtered listings
+            function updateMapMarkers(listings) {
+                clearMarkers(); // Clear existing markers
+            
+                listings.forEach(listing => {
+                    if (listing.latitude && listing.longitude) {
+                        addListingMarker(listing); // Add a new marker for each listing
+                    }
+                });
+            }
+            
+
             
         </script>
     

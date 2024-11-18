@@ -17,7 +17,7 @@ def calculate_distance_from_school(row):
 
 # Define the test function
 def test_calculate_distance_from_school():
-    # Sample coordinate near Syracuse University'
+    # Sample coordinate near Syracuse University
     test_row = {'latitude': 43.0492, 'longitude': -76.1401}
     expected_distance = 1.13  # Expected distance in km, rounded to two decimal places
     
