@@ -6,7 +6,7 @@
 ---
 
 ## Structure
-- `app.py`: run this and get http://127.0.0.1:5000, which you put this in browser to access the web application
+- `app.py`: run this on localhost
 - `index.html`: frontend of the application
 - `style.css`: custom styling
 - `import_data.py`: script to load and process CSV data into the SQLite database. *(Not required for general use as the database is preloaded.)*
