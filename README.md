@@ -1,6 +1,7 @@
 # OrangeNest
 
 **OrangeNest** is course project designed to help students at Syracuse University find housing near campus!
+**Contributers** Xiao Lin Zheng, Menglu Liu, Guozheng Wang, Qiyu Liu
 
 ---
 
