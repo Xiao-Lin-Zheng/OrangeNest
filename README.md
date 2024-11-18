@@ -19,9 +19,9 @@
 - Required Python libraries: `pandas`, `geopy`, `datetime`
 
 ### Install
-   git clone https://github.com/<your-github-username>/orangenest.git
-   cd orangenest
-   pip install flask pandas geopy
+- git clone
+- cd orangenest
+- pip install flask pandas geopy
 
 In the index.html file, replace the following code with your own Google Maps API key:
 <!-- Custom JavaScript for Map and Filtering -->
